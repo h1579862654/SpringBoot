@@ -17,7 +17,6 @@ import java.io.IOException;
 
 @MapperScan("com.mapper")
 @SpringBootApplication
-
 public class StartApp {
     public static void main(String[] args) {
 
