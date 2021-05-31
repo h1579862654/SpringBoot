@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.LoginMapper">
+
+<!--<select id="getAllUser" resultType="user">-->
+<!--    select * from TT_USER-->
+<!--</select>-->
+
+<select id="getUserByPhone" resultType="user" parameterType="String">
+    select * from TT_USER where PHONE = #{PHONE}
+</select>
+
+<select id="getUser" parameterType="user" resultType="user">
+    select * from TT_USER where phone = ${phone} and pass =${pass} and STATE != 1
+</select>
+
+<insert id="regUser" parameterType="user" >
+<selectKey resultType="int" keyProperty="id"  order="BEFORE">
+    select TT_user_SEQ.Nextval from dual
+</selectKey>
+        INSERT into TT_USER (id,phone,pass) values(#{id},${phone},${pass})
+</insert>
+<insert id="regUserRole" parameterType="user" >
+    insert into USER_ROLE values (USER_ROLE_SEQ.Nextval,#{id},1)
+</insert>
+
+<delete id="delUserRole" parameterType="user" >
+    delete USER_ROLE where id =#{id}
+</delete>
+
+<select id="selALLTPro" parameterType="user" resultType="tpro">
+   select t.* from T_pro t where uuid =
+(select id from TT_USER where phone = #{phone})
+</select>
+
+
+</mapper>
