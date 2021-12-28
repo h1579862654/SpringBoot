@@ -16,4 +16,5 @@ public interface LoginMapper {
     int regUser(User u);
     int delUser(User u);
     List<TPro> selALLTPro(User u);
+    User getUserByPro(TPro t);
 }

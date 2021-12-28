@@ -13,14 +13,16 @@
 </select>
 
 <select id="getUser" parameterType="user" resultType="user">
-    select * from TT_USER where phone = ${phone} and pass =${pass} and STATE != 1
+    select * from TT_USER where phone = #{phone}
+    and pass = #{pass} and STATE != 1
 </select>
 
 <insert id="regUser" parameterType="user" >
 <selectKey resultType="int" keyProperty="id"  order="BEFORE">
     select TT_user_SEQ.Nextval from dual
 </selectKey>
-        INSERT into TT_USER (id,phone,pass) values(#{id},${phone},${pass})
+    INSERT into TT_USER (id,phone,pass)
+    values(#{id},#{phone},#{pass})
 </insert>
 <insert id="regUserRole" parameterType="user" >
     insert into USER_ROLE values (USER_ROLE_SEQ.Nextval,#{id},1)
@@ -31,9 +33,13 @@
 </delete>
 
 <select id="selALLTPro" parameterType="user" resultType="tpro">
-   select t.* from T_pro t where uuid =
-(select id from TT_USER where phone = #{phone})
+    Select T_pro.id, PNAME,UUID from T_pro inner join TT_USER
+    on TT_USER.id = T_pro.uuid where phone = #{phone}
 </select>
 
+<select id="getUserByPro" parameterType="tpro" resultType="user">
+   	Select u.*  from TT_USER u inner join T_pro t on u.id = t.uuid
+   	where t.id = #{id} and t.pname =#{pname} and t.pswer = #{pswer}
+</select>
 
 </mapper>

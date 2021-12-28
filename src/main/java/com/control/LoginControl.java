@@ -97,6 +97,17 @@ public class LoginControl {
         return "login.html";
     }
 
+    @RequestMapping("getpass")
+    @ResponseBody
+    public String getPass(TPro t){
+        System.out.println("获得的答案："+t);
+        User u = ig.getUserByPro(t);
+        if(u==null){
+            return "1";
+        }
+        return u.getPass();
+    }
+
 
 
 }

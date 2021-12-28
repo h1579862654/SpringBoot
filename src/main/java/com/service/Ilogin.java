@@ -55,4 +55,8 @@ public interface Ilogin {
     List<TPro> selALLTPro(User u);
 
 
+    /**
+     * 查询找回密码的账户
+     */
+    User getUserByPro(TPro t);
 }

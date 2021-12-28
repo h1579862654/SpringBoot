@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="js/jquery_3.5.1.js"></script>
-
+	<script src="js/myJs.js"></script>
 </head>
 <body>
 
@@ -46,7 +46,7 @@
 	$(document).ready(function() {
 		$("#lg").click(function() {
 			console.log("点击!")
-			var phone = $("#phone").val(); //获取提交的值
+			var phone = $("#phone").val().trim(); //获取提交的值
 
 			//进行判断，如果获取的值为0那么提示账号不能为空
 			if (phone.length == 0) {
@@ -56,7 +56,7 @@
 
 
 			//密码进行验证不能为空
-			var pass = $("#pass").val(); //获取提交的密码的值
+			var pass = $("#pass").val().trim(); //获取提交的密码的值
 			if (pass.length == 0) {
 				$("#ts_pass").html("请输入密码");
 				return false;
@@ -80,14 +80,9 @@
 
 				}
 			})
-			//禁止重复点击
-			$("#lg").attr("disabled", true);
-			$("#lg").css({'background-color' : 'gray'});
-			//恢复按钮
-			setTimeout(function() {
-				$("#lg").attr("disabled", false);
-				$("#lg").css({'background-color' : ''});
-			}, 2000);
+			//防止重复点击
+			jingz("lg");
+
 			console.log("点击54622")
 		});
 	});

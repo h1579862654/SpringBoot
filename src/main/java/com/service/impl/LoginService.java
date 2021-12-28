@@ -77,4 +77,11 @@ public class LoginService implements Ilogin {
         return   lm.selALLTPro(u);
     }
 
+    @Override
+    public User getUserByPro(TPro t) {
+        User u = lm.getUserByPro(t);
+        System.out.println("找到的用户"+u);
+        return u;
+    }
+
 }
